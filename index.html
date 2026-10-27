@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحصة الافتراضية المتزامنة - الدليل التفاعلي 2026</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Readex Pro & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        moeGreen: '#007A5E',
+                        moeEmerald: '#00A887',
+                        moeDarkGreen: '#005642',
+                        teamsPurple: '#5B5FC7',
+                        teamsDarkPurple: '#464775',
+                        petrolBlue: '#0E5A6B',
+                        alertOrange: '#E07B2E',
+                        alertDarkOrange: '#B85810',
+                        clayBg: '#F8FAF9',
+                    },
+                    fontFamily: {
+                        sans: ['Tajawal', 'sans-serif'],
+                        heading: ['Readex Pro', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'clay': '0 20px 35px -10px rgba(0, 122, 94, 0.12), 0 1px 3px rgba(0,0,0,0.05)',
+                        'clay-hover': '0 25px 45px -12px rgba(0, 122, 94, 0.22), 0 4px 6px -2px rgba(0,0,0,0.05)',
+                        'floating': '0 25px 50px -12px rgba(14, 90, 107, 0.25)',
+                        'inner-soft': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #F4F7F6;
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Readex Pro', sans-serif;
+        }
+        /* Custom 3D Isometric Clay Simulation Effects */
+        .clay-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .clay-card:hover {
+            transform: translateY(-4px);
+        }
+        .step-active {
+            border-color: #00A887;
+            box-shadow: 0 0 0 3px rgba(0, 168, 135, 0.25), 0 20px 35px -10px rgba(0, 122, 94, 0.2);
+        }
+        /* Pulse dot animation */
+        @keyframes subtle-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.08); opacity: 1; }
+        }
+        .animate-subtle {
+            animation: subtle-pulse 3s infinite ease-in-out;
+        }
+        /* Custom timeline line gradient */
+        .timeline-connector {
+            background: linear-gradient(180deg, #0E5A6B 0%, #5B5FC7 33%, #00A887 66%, #E07B2E 100%);
+        }
+        /* Print Styles */
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .clay-card { box-shadow: none !important; border: 1px solid #ddd !important; }
+            .print-full-width { width: 100% !important; max-width: 100% !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 antialiased selection:bg-moeGreen selection:text-white">
+
+    <!-- Top Navigation Header -->
+    <header class="no-print sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-emerald-100 shadow-sm transition-all">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-moeGreen to-moeEmerald flex items-center justify-center text-white shadow-md shadow-moeGreen/20">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-moeGreen border border-emerald-200">دليل مدرستي 2026</span>
+                        <span class="text-xs text-slate-500 font-medium hidden sm:inline">الإدارة العامة لقنوات التعليم الإلكتروني</span>
+                    </div>
+                    <h1 class="text-base sm:text-lg font-heading font-bold text-slate-800 leading-tight">الحصة الافتراضية المتزامنة التفاعلية</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <!-- View Mode Switcher -->
+                <div class="flex bg-slate-100 p-1 rounded-xl text-xs font-medium">
+                    <button id="viewInfographicBtn" class="px-3 py-1.5 rounded-lg bg-white text-moeGreen shadow-sm font-bold flex items-center gap-1.5 transition">
+                        <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+                        <span>الإنفوجرافيك 3D</span>
+                    </button>
+                    <button id="viewVideoPlayerBtn" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 font-medium flex items-center gap-1.5 transition">
+                        <i data-lucide="video" class="w-3.5 h-3.5"></i>
+                        <span>محاكي الفيديو 60ث</span>
+                    </button>
+                </div>
+
+                <!-- Print & Sound Toggles -->
+                <button id="soundToggleBtn" title="كتم/تشغيل المؤثرات الصوتية" class="p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 transition flex items-center justify-center">
+                    <i id="soundIcon" data-lucide="volume-2" class="w-4 h-4 text-emerald-600"></i>
+                </button>
+                <button onclick="window.print()" title="طباعة أو تصدير PDF" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm transition">
+                    <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                    <span class="hidden sm:inline">تصدير / طباعة</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-6 pb-20">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: 3D STEPPER INFOGRAPHIC (Interactive) -->
+        <!-- ========================================== -->
+        <section id="infographicSection" class="transition-all duration-300">
+            
+            <!-- Hero Banner: 3D Teacher & Madrasati-Teams Integration -->
+            <div class="clay-card rounded-3xl p-6 sm:p-8 mb-8 border border-emerald-100 shadow-clay relative overflow-hidden bg-gradient-to-br from-white via-emerald-50/20 to-teal-50/40">
+                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-moeGreen/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-10 -top-10 w-52 h-52 bg-teamsPurple/5 rounded-full blur-2xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                    <!-- Text Info Column -->
+                    <div class="md:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100/70 border border-emerald-200 text-moeGreen text-xs font-bold">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-moeGreen"></i>
+                            <span>إجراءات معتمدة رسمياً ومحدثة لعام 2026</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-heading font-extrabold text-slate-900 leading-snug">
+                            رحلة الحصة الافتراضية المتزامنة <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-moeGreen to-petrolBlue">في 4 محطات إجرائية ذكية</span>
+                        </h2>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            من إعداد الدرس في جدول مدرستي والتكامل التلقائي مع تيمز، وصولاً إلى ضبط التفاعل الصفي والاعتماد النهائي في سجل المتابعة اليومي. انقر على أي مرحلة لاستعراض الخطوات التفصيلية وملاحظات الدليل.
+                        </p>
+
+                        <!-- Quick Action Stats / Badges -->
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <div class="px-3 py-2 rounded-xl bg-white border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                                <div class="w-3 h-3 rounded-full bg-petrolBlue"></div>
+                                <span class="text-xs font-medium text-slate-700">1. إعداد الدرس</span>
+                            </div>
+                            <div class="px-3 py-2 rounded-xl bg-white border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                                <div class="w-3 h-3 rounded-full bg-teamsPurple"></div>
+                                <span class="text-xs font-medium text-slate-700">2. الانطلاق (Teams)</span>
+                            </div>
+                            <div class="px-3 py-2 rounded-xl bg-white border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                                <div class="w-3 h-3 rounded-full bg-moeEmerald"></div>
+                                <span class="text-xs font-medium text-slate-700">3. التفاعل الحي</span>
+                            </div>
+                            <div class="px-3 py-2 rounded-xl bg-white border border-slate-200/80 shadow-sm flex items-center gap-2.5">
+                                <div class="w-3 h-3 rounded-full bg-alertOrange"></div>
+                                <span class="text-xs font-medium text-slate-700">4. الرصد والحفظ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3D Isometric Visual Illustration Box -->
+                    <div class="md:col-span-5 flex justify-center items-center">
+                        <div class="relative w-full max-w-sm rounded-2xl p-4 bg-gradient-to-b from-white/90 to-emerald-50/50 border border-emerald-100 shadow-floating flex flex-col items-center">
+                            <!-- SVG 3D Isometric Mockup of Teacher + Hologram Screen -->
+                            <div class="w-full h-56 flex items-center justify-center relative">
+                                <svg viewBox="0 0 400 300" class="w-full h-full drop-shadow-lg">
+                                    <defs>
+                                        <!-- Gradients -->
+                                        <linearGradient id="laptopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#E2F1ED"/>
+                                            <stop offset="100%" stop-color="#C2E6DC"/>
+                                        </linearGradient>
+                                        <linearGradient id="holoScreen" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#00A887" stop-opacity="0.85"/>
+                                            <stop offset="100%" stop-color="#0E5A6B" stop-opacity="0.95"/>
+                                        </linearGradient>
+                                        <linearGradient id="teamsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#5B5FC7"/>
+                                            <stop offset="100%" stop-color="#464775"/>
+                                        </linearGradient>
+                                        <filter id="clayShadow" x="-20%" y="-20%" width="140%" height="140%">
+                                            <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#005642" flood-opacity="0.15"/>
+                                        </filter>
+                                    </defs>
+
+                                    <!-- Floating Platform Base -->
+                                    <ellipse cx="200" cy="245" rx="160" ry="40" fill="#E2EBE8" opacity="0.7" />
+                                    <ellipse cx="200" cy="240" rx="140" ry="32" fill="#FFFFFF" />
+
+                                    <!-- 3D Laptop with Holographic UI -->
+                                    <g transform="translate(60, 60)" filter="url(#clayShadow)">
+                                        <!-- Base Keyboard -->
+                                        <polygon points="40,150 150,150 180,185 10,185" fill="url(#laptopGrad)" stroke="#A7D5C9" stroke-width="2"/>
+                                        <!-- Trackpad -->
+                                        <polygon points="80,165 110,165 115,180 75,180" fill="#FFFFFF" opacity="0.8"/>
+                                        <!-- Keys grid representation -->
+                                        <line x1="35" y1="158" x2="155" y2="158" stroke="#87C4B5" stroke-width="2"/>
+                                        <!-- Holographic Screen (Isometric angled) -->
+                                        <polygon points="40,40 150,20 150,145 40,145" fill="url(#holoScreen)" rx="8"/>
+                                        <!-- UI Interface Cards inside Screen -->
+                                        <rect x="50" y="45" width="40" height="30" rx="4" fill="#FFFFFF" opacity="0.3"/>
+                                        <rect x="95" y="40" width="45" height="40" rx="4" fill="#FFFFFF" opacity="0.4"/>
+                                        <circle cx="70" cy="60" r="8" fill="#FFFFFF" opacity="0.7"/>
+                                        <!-- Teams Badge on Screen -->
+                                        <rect x="52" y="85" width="88" height="25" rx="5" fill="url(#teamsGrad)"/>
+                                        <circle cx="65" cy="97" r="6" fill="#FFFFFF"/>
+                                        <rect x="76" y="93" width="55" height="4" rx="2" fill="#FFFFFF" opacity="0.9"/>
+                                        <rect x="76" y="100" width="35" height="3" rx="1.5" fill="#FFFFFF" opacity="0.7"/>
+                                    </g>
+
+                                    <!-- 3D Friendly Saudi Teacher Character (Isometric Stylized) -->
+                                    <g transform="translate(230, 45)" filter="url(#clayShadow)">
+                                        <!-- Head & Ghutra / Shemagh -->
+                                        <ellipse cx="60" cy="50" rx="24" ry="26" fill="#FFFFFF"/>
+                                        <!-- Shemagh Red/White Pattern Representation -->
+                                        <path d="M38,40 Q60,18 82,40 Q85,75 75,95 L45,95 Q35,75 38,40 Z" fill="#D32F2F" opacity="0.85"/>
+                                        <path d="M42,42 Q60,24 78,42 Q80,72 72,90 L48,90 Q40,72 42,42 Z" fill="#FFFFFF"/>
+                                        <!-- Agal (Black rings) -->
+                                        <ellipse cx="60" cy="36" rx="20" ry="7" fill="#1E293B"/>
+                                        <ellipse cx="60" cy="40" rx="20" ry="7" fill="#1E293B"/>
+                                        <!-- Friendly Face -->
+                                        <ellipse cx="60" cy="55" rx="14" ry="15" fill="#FAD0B0"/>
+                                        <!-- Eyes & Smile -->
+                                        <circle cx="55" cy="53" r="2.2" fill="#334155"/>
+                                        <circle cx="65" cy="53" r="2.2" fill="#334155"/>
+                                        <path d="M56,61 Q60,65 64,61" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                        <path d="M53,62 Q60,69 67,62" fill="#D97706" opacity="0.3"/> <!-- Trim Beard -->
+                                        <!-- Thobe (Pure White National Attire) -->
+                                        <path d="M40,95 L80,95 L95,200 L25,200 Z" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+                                        <!-- Collar -->
+                                        <path d="M54,95 L60,105 L66,95 Z" fill="#E2E8F0"/>
+                                        <!-- Right Hand presenting to screen -->
+                                        <path d="M38,110 L10,125 Q5,130 10,135 L35,125" fill="#FFFFFF"/>
+                                        <ellipse cx="8" cy="130" rx="6" ry="5" fill="#FAD0B0"/>
+                                        <!-- Left Hand holding tablet -->
+                                        <path d="M80,110 L95,135 Q98,142 95,145 L78,135" fill="#FFFFFF"/>
+                                        <ellipse cx="96" cy="142" rx="5" ry="5" fill="#FAD0B0"/>
+                                        <!-- Modern Tablet in Hand -->
+                                        <rect x="90" y="130" width="22" height="30" rx="3" fill="#007A5E" stroke="#FFFFFF" stroke-width="1.5" transform="rotate(15 90 130)"/>
+                                    </g>
+
+                                    <!-- Floating Checkmark and Live Icon -->
+                                    <g transform="translate(180, 40)" class="animate-subtle">
+                                        <circle cx="20" cy="20" r="16" fill="#00A887" filter="url(#clayShadow)"/>
+                                        <path d="M14,20 L18,24 L26,15" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round"/>
+                                    </g>
+                                    <g transform="translate(30, 45)" class="animate-subtle">
+                                        <rect x="0" y="0" width="36" height="22" rx="11" fill="#E07B2E"/>
+                                        <circle cx="11" cy="11" r="4" fill="#FFFFFF"/>
+                                        <text x="26" y="14" font-size="9" fill="#FFFFFF" font-weight="bold" text-anchor="middle">LIVE</text>
+                                    </g>
+                                </svg>
+                            </div>
+
+                            <div class="w-full text-center mt-1">
+                                <span class="text-xs font-semibold text-slate-700">تكامل تلقائي موثق بين منصة مدرستي ومايكروسوفت تيمز</span>
+                                <div class="flex items-center justify-center gap-2 mt-2">
+                                    <span class="inline-block px-2.5 py-0.5 rounded-md bg-emerald-100 text-moeGreen text-[11px] font-bold">حضور آلي</span>
+                                    <span class="inline-block px-2.5 py-0.5 rounded-md bg-purple-100 text-teamsPurple text-[11px] font-bold">رابط فوري</span>
+                                    <span class="inline-block px-2.5 py-0.5 rounded-md bg-amber-100 text-alertOrange text-[11px] font-bold">حفظ إلزامي</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mandatory Prerequisite Alert Box (ص 60) -->
+            <div class="mb-8 p-4 rounded-2xl bg-amber-50 border-r-4 border-alertOrange text-amber-950 flex items-start gap-3 shadow-sm">
+                <div class="p-2 rounded-xl bg-alertOrange/10 text-alertOrange shrink-0 mt-0.5">
+                    <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                </div>
+                <div class="text-xs sm:text-sm leading-relaxed">
+                    <strong class="font-bold font-heading text-alertDarkOrange block text-sm mb-0.5">شرط مسبق إلزامي قبل اعتماد رصد الدرجات (ص 60):</strong>
+                    يجب على المعلم أولاً ضبط توزيع الدرجات لمرة واحدة فقط لكل مقرر دراسي عبر المسار: <span class="font-semibold bg-amber-100/70 px-2 py-0.5 rounded text-amber-900">سجلات المتابعة اليومية ← إعدادات سجلات المتابعة</span> لضمان احتساب درجات الواجبات والاختبارات القصيرة والفترية بدقة في السجل النهائي.
+                </div>
+            </div>
+
+            <!-- 4-STEP ISOMETRIC ROADMAP (The Interactive Stepper) -->
+            <div class="relative">
+                <!-- Center Connecting Line (Desktop) -->
+                <div class="hidden lg:block absolute right-1/2 top-8 bottom-8 w-1.5 -translate-x-1/2 rounded-full timeline-connector shadow-sm"></div>
+
+                <div class="space-y-8 relative">
+
+                    <!-- ============================================== -->
+                    <!-- STEP 1: PRE-CLASS / LESSON PREPARATION (ص 53-55) -->
+                    <!-- ============================================== -->
+                    <div id="stepCard1" class="clay-card rounded-3xl p-5 sm:p-7 border-2 border-slate-100 hover:border-petrolBlue/40 shadow-clay transition-all duration-300">
+                        <div class="flex flex-col lg:flex-row items-start gap-6">
+                            
+                            <!-- 3D Badge / Icon Visual -->
+                            <div class="w-full lg:w-44 flex flex-row lg:flex-col items-center justify-between lg:justify-center p-4 rounded-2xl bg-gradient-to-br from-petrolBlue/10 to-emerald-50 border border-petrolBlue/20 shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-petrolBlue text-white flex items-center justify-center shadow-lg shadow-petrolBlue/30 relative">
+                                    <i data-lucide="calendar-check" class="w-8 h-8"></i>
+                                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center border-2 border-white">1</span>
+                                </div>
+                                <div class="text-right lg:text-center mt-0 lg:mt-3">
+                                    <span class="block text-xs font-bold text-petrolBlue uppercase tracking-wider">المرحلة الأولى</span>
+                                    <span class="text-sm font-heading font-extrabold text-slate-800">إعداد الدرس</span>
+                                    <span class="block text-[11px] text-slate-500 mt-0.5 font-medium">ص 53 - 55</span>
+                                </div>
+                                <button onclick="playTone('step1')" class="no-print p-2 rounded-xl bg-white text-petrolBlue hover:bg-petrolBlue hover:text-white transition shadow-sm" title="استمع إلى التوجيه">
+                                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+
+                            <!-- Card Content & Procedures -->
+                            <div class="flex-1 space-y-4 w-full">
+                                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                                    <div>
+                                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-50 text-petrolBlue text-xs font-bold mb-1">
+                                            <span>ما قبل الحصة</span>
+                                            <i data-lucide="arrow-left" class="w-3 h-3"></i>
+                                            <span>حضّر مرة.. واعتمد بثقة</span>
+                                        </div>
+                                        <h3 class="text-lg sm:text-xl font-heading font-bold text-slate-900">إعداد الحصة واختيار نمط التعلم المتزامن</h3>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 font-semibold">بانتظار إعداد الدرس ← تم الإعداد</span>
+                                </div>
+
+                                <!-- Procedural Steps Grid -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm">
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-petrolBlue/15 text-petrolBlue font-bold flex items-center justify-center shrink-0 text-xs">أ</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">مسار الدخول:</strong>
+                                            <span>من القائمة الرئيسية: <code class="text-petrolBlue font-semibold">المقررات والمصادر ← الجدول الدراسي</code> ثم اختر الحصة المحددة.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-petrolBlue/15 text-petrolBlue font-bold flex items-center justify-center shrink-0 text-xs">ب</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">نمط التعلم الإلزامي:</strong>
+                                            <span>تحديد الخيار: <span class="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">افتراضي متزامن</span> (يستلزم حضور الطالب والمعلم معاً).</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-petrolBlue/15 text-petrolBlue font-bold flex items-center justify-center shrink-0 text-xs">ج</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">الاشتراط النظامي (≥ 1):</strong>
+                                            <span>إضافة عنصر تعليمي إلزامي واحد على الأقل (واجب، اختبار، نشاط، أو إثراء) من البنوك أو بإعداد جديد.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-petrolBlue/15 text-petrolBlue font-bold flex items-center justify-center shrink-0 text-xs">د</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">الفحص قبل الحفظ:</strong>
+                                            <span>الضغط على زر <span class="font-semibold text-slate-900 underline">معاينة شاشة الطالب</span> للتحقق من طريقة ظهور المحتوى لديهم.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Smart Pro Tip Badge -->
+                                <div class="p-3 rounded-xl bg-emerald-50/90 border border-emerald-200 text-xs text-moeDarkGreen flex items-center justify-between flex-wrap gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="lightbulb" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+                                        <span><strong>تلميحة احترافية (ص 55):</strong> فعّل خيار <em>"احفظ التحضير لتمكين نسخه لحصة أخرى"</em> لاختصار وقت التحضير في الفصول المتوازية.</span>
+                                    </div>
+                                    <span class="text-[11px] font-bold px-2 py-0.5 rounded bg-white text-emerald-800 shadow-xs">نسخ التحضير</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ============================================== -->
+                    <!-- STEP 2: LAUNCH & TEAMS INTEGRATION (ص 55, 78) -->
+                    <!-- ============================================== -->
+                    <div id="stepCard2" class="clay-card rounded-3xl p-5 sm:p-7 border-2 border-slate-100 hover:border-teamsPurple/40 shadow-clay transition-all duration-300">
+                        <div class="flex flex-col lg:flex-row items-start gap-6">
+                            
+                            <!-- 3D Badge / Icon Visual -->
+                            <div class="w-full lg:w-44 flex flex-row lg:flex-col items-center justify-between lg:justify-center p-4 rounded-2xl bg-gradient-to-br from-teamsPurple/10 to-indigo-50 border border-teamsPurple/20 shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-teamsPurple text-white flex items-center justify-center shadow-lg shadow-teamsPurple/30 relative">
+                                    <i data-lucide="video" class="w-8 h-8"></i>
+                                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-purple-600 text-white text-xs font-bold flex items-center justify-center border-2 border-white">2</span>
+                                </div>
+                                <div class="text-right lg:text-center mt-0 lg:mt-3">
+                                    <span class="block text-xs font-bold text-teamsPurple uppercase tracking-wider">المرحلة الثانية</span>
+                                    <span class="text-sm font-heading font-extrabold text-slate-800">الانطلاق عبر تيمز</span>
+                                    <span class="block text-[11px] text-slate-500 mt-0.5 font-medium">ص 55 & 78</span>
+                                </div>
+                                <button onclick="playTone('step2')" class="no-print p-2 rounded-xl bg-white text-teamsPurple hover:bg-teamsPurple hover:text-white transition shadow-sm" title="استمع إلى التوجيه">
+                                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+
+                            <!-- Card Content & Procedures -->
+                            <div class="flex-1 space-y-4 w-full">
+                                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                                    <div>
+                                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-purple-50 text-teamsPurple text-xs font-bold mb-1">
+                                            <span>بدء الحصة</span>
+                                            <i data-lucide="arrow-left" class="w-3 h-3"></i>
+                                            <span>إشعار تلقائي.. ورابط جاهز</span>
+                                        </div>
+                                        <h3 class="text-lg sm:text-xl font-heading font-bold text-slate-900">الربط الآلي وبدء البث في الموعد</h3>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-lg bg-purple-100 text-teamsPurple font-semibold">تكامل مدرستي مع Teams</span>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm">
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-teamsPurple/15 text-teamsPurple font-bold flex items-center justify-center shrink-0 text-xs">أ</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">الإشعار الآلي للطلاب (ص 55):</strong>
+                                            <span>يرسل النظام تلقائياً رسالة بريد إلكتروني لجميع طلاب الفصل تحتوي على رابط وتفاصيل الدرس الافتراضي فور الحفظ.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-teamsPurple/15 text-teamsPurple font-bold flex items-center justify-center shrink-0 text-xs">ب</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">مسار دخول المعلم (ص 78):</strong>
+                                            <span>من شريط أدوات المساعدة في أعلى الصفحة الرئيسة ← أيقونة <code class="text-teamsPurple font-semibold">مايكروسوفت أوفيس ← مايكروسوفت تيمز</code>.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-teamsPurple/15 text-teamsPurple font-bold flex items-center justify-center shrink-0 text-xs">ج</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">الالتزام بالجدول:</strong>
+                                            <span>بدء اللقاء في التوقيت الدقيق المحدد بالجدول المدرسي لضمان التحاق الطلاب دون تأخير.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition flex items-start gap-3">
+                                        <div class="w-6 h-6 rounded-lg bg-teamsPurple/15 text-teamsPurple font-bold flex items-center justify-center shrink-0 text-xs">د</div>
+                                        <div>
+                                            <strong class="font-bold text-slate-800 block mb-0.5">تنويه الدليل الرسمي:</strong>
+                                            <span>الدليل يركز على الربط المؤسسي وإشعار الرابط عبر المنصة؛ كافة أدوات العرض ومشاركة الشاشة تتم داخل نافذة Teams.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 rounded-xl bg-purple-50/80 border border-purple-200 text-xs text-teamsDarkPurple flex items-center gap-2">
+                                    <i data-lucide="check-circle-2" class="w-4 h-4 text-teamsPurple shrink-0"></i>
+                                    <span><strong>ميزة التكامل التقني:</strong> رابط الحصة موحد ومباشر، وقائمة الحضور يتم استيرادها تلقائياً للنظام دون الحاجة لروابط خارجية.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ============================================== -->
+                    <!-- STEP 3: INTERACTION & CLASS MANAGEMENT (ص 21, 46-47, 73) -->
+                    <!-- ============================================== -->
+                    <div id="stepCard3" class="clay-card rounded-3xl p-5 sm:p-7 border-2 border-slate-100 hover:border-moeEmerald/40 shadow-clay transition-all duration-300">
+                        <div class="flex flex-col lg:flex-row items-start gap-6">
+                            
+                            <!-- 3D Badge / Icon Visual -->
+                            <div class="w-full lg:w-44 flex flex-row lg:flex-col items-center justify-between lg:justify-center p-4 rounded-2xl bg-gradient-to-br from-moeEmerald/10 to-teal-50 border border-moeEmerald/20 shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-moeEmerald text-white flex items-center justify-center shadow-lg shadow-moeEmerald/30 relative">
+                                    <i data-lucide="messages-square" class="w-8 h-8"></i>
+                                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-emerald-600 text-white text-xs font-bold flex items-center justify-center border-2 border-white">3</span>
+                                </div>
+                                <div class="text-right lg:text-center mt-0 lg:mt-3">
+                                    <span class="block text-xs font-bold text-moeEmerald uppercase tracking-wider">المرحلة الثالثة</span>
+                                    <span class="text-sm font-heading font-extrabold text-slate-800">التفاعل الصفي</span>
+                                    <span class="block text-[11px] text-slate-500 mt-0.5 font-medium">ص 21، 46-47</span>
+                                </div>
+                                <button onclick="playTone('step3')" class="no-print p-2 rounded-xl bg-white text-moeEmerald hover:bg-moeEmerald hover:text-white transition shadow-sm" title="استمع إلى التوجيه">
+                                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+
+                            <!-- Card Content & Procedures -->
+                            <div class="flex-1 space-y-4 w-full">
+                                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                                    <div>
+                                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-moeEmerald text-xs font-bold mb-1">
+                                            <span>أثناء الحصة</span>
+                                            <i data-lucide="arrow-left" class="w-3 h-3"></i>
+                                            <span>كل طالب يشارك ويبدع</span>
+                                        </div>
+                                        <h3 class="text-lg sm:text-xl font-heading font-bold text-slate-900">إدارة التفاعل الصفي، لوحات النقاش والألعاب التفاعلية</h3>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-lg bg-emerald-100 text-moeDarkGreen font-semibold">بنوك الأسئلة والأنشطة</span>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm">
+                                    <!-- Discussion Boards Sub-Box -->
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-2">
+                                        <div class="flex items-center gap-2 text-moeEmerald font-bold text-xs">
+                                            <i data-lucide="split" class="w-4 h-4"></i>
+                                            <span>لوحات النقاش وخيارات التقسيم (ص 46):</span>
+                                        </div>
+                                        <ul class="space-y-1 text-slate-700 list-disc list-inside text-xs">
+                                            <li><strong>التقسيم العشوائي:</strong> يحدد المعلم عدد المجموعات والطلاب ويوزعهم النظام آلياً.</li>
+                                            <li><strong>التقسيم المنظم:</strong> يضيف المعلم المجموعات ويسند الطلاب يدوياً.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Interactive Games Sub-Box -->
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-2">
+                                        <div class="flex items-center gap-2 text-moeEmerald font-bold text-xs">
+                                            <i data-lucide="gamepad-2" class="w-4 h-4"></i>
+                                            <span>الألعاب التفاعلية من بنك الأسئلة (ص 21):</span>
+                                        </div>
+                                        <div class="flex flex-wrap gap-1.5 text-[11px] font-medium text-slate-700">
+                                            <span class="px-2 py-0.5 rounded bg-emerald-100/70 text-emerald-800">فكر واختر</span>
+                                            <span class="px-2 py-0.5 rounded bg-teal-100/70 text-teal-800">فكر ورتب</span>
+                                            <span class="px-2 py-0.5 rounded bg-cyan-100/70 text-cyan-800">التوصيل التفاعلي</span>
+                                        </div>
+                                        <p class="text-[11px] text-slate-600">تعزيز التعلم النشط عبر قوالب مرئية محفزة للطلاب.</p>
+                                    </div>
+
+                                    <!-- Comment Moderation -->
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-1">
+                                        <strong class="font-bold text-slate-800 block mb-0.5">ضبط مشاركات الطلاب (ص 47):</strong>
+                                        <span>إمكانية <span class="font-semibold text-emerald-800">تثبيت</span> أفضل تعليق بأعلى اللوحة، الإعجاب، وإضافة التغذية الراجعة الفورية.</span>
+                                    </div>
+
+                                    <!-- Student Inquiries -->
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-1">
+                                        <strong class="font-bold text-slate-800 block mb-0.5">استفسارات الطلاب (ص 73):</strong>
+                                        <span>متابعة أسئلة الطلاب الواردة على الدرس والإجابة عنها كتابياً عبر قنوات التواصل المعتمدة.</span>
+                                    </div>
+                                </div>
+
+                                <div class="p-3 rounded-xl bg-teal-50/80 border border-teal-200 text-xs text-teal-900 flex items-center justify-between flex-wrap gap-2">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="award" class="w-4 h-4 text-teal-700 shrink-0"></i>
+                                        <span><strong>رصد درجات التفاعل (ص 48):</strong> يمكن تخصيص درجات مباشرة لمشاركات الطلاب في لوحات النقاش وإدراجها بالسجل.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ============================================== -->
+                    <!-- STEP 4: ATTENDANCE & GRADES RECORDING (ص 56, 22-26, 60-62) -->
+                    <!-- ============================================== -->
+                    <div id="stepCard4" class="clay-card rounded-3xl p-5 sm:p-7 border-2 border-slate-100 hover:border-alertOrange/40 shadow-clay transition-all duration-300">
+                        <div class="flex flex-col lg:flex-row items-start gap-6">
+                            
+                            <!-- 3D Badge / Icon Visual -->
+                            <div class="w-full lg:w-44 flex flex-row lg:flex-col items-center justify-between lg:justify-center p-4 rounded-2xl bg-gradient-to-br from-alertOrange/10 to-amber-50 border border-alertOrange/20 shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-alertOrange text-white flex items-center justify-center shadow-lg shadow-alertOrange/30 relative">
+                                    <i data-lucide="clipboard-check" class="w-8 h-8"></i>
+                                    <span class="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-amber-600 text-white text-xs font-bold flex items-center justify-center border-2 border-white">4</span>
+                                </div>
+                                <div class="text-right lg:text-center mt-0 lg:mt-3">
+                                    <span class="block text-xs font-bold text-alertOrange uppercase tracking-wider">المرحلة الرابعة</span>
+                                    <span class="text-sm font-heading font-extrabold text-slate-800">الرصد والاعتماد</span>
+                                    <span class="block text-[11px] text-slate-500 mt-0.5 font-medium">ص 56، ص 22-26</span>
+                                </div>
+                                <button onclick="playTone('step4')" class="no-print p-2 rounded-xl bg-white text-alertOrange hover:bg-alertOrange hover:text-white transition shadow-sm" title="استمع إلى التوجيه">
+                                    <i data-lucide="play-circle" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+
+                            <!-- Card Content & Procedures -->
+                            <div class="flex-1 space-y-4 w-full">
+                                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                                    <div>
+                                        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 text-alertDarkOrange text-xs font-bold mb-1">
+                                            <span>ما بعد الحصة</span>
+                                            <i data-lucide="arrow-left" class="w-3 h-3"></i>
+                                            <span>راجع.. احفظ.. وارصد</span>
+                                        </div>
+                                        <h3 class="text-lg sm:text-xl font-heading font-bold text-slate-900">اعتماد الحضور وسجل المتابعة اليومي وتصدير التقارير</h3>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-lg bg-amber-100 text-alertDarkOrange font-semibold">المحطة الختامية الحاسمة</span>
+                                </div>
+
+                                <!-- Critical Warning Box regarding Attendance -->
+                                <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-300 text-xs sm:text-sm text-amber-950 flex items-start gap-3">
+                                    <div class="p-1 rounded bg-amber-200 text-amber-800 shrink-0 font-bold">⚠️ تنبيه إجرائي حرج (ص 56):</div>
+                                    <div>
+                                        رصد الحضور والغياب يتم آلياً بتكامل المنصة مع Teams، <strong>ولكن لا يُعتمد الحضور نهائياً في النظام إلا بالدخول إلى شاشة (رصد الغياب) والاطلاع على القائمة والضغط على زر (حفظ)</strong>.
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs sm:text-sm">
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-1">
+                                        <strong class="font-bold text-slate-800 block mb-0.5">تعديل حالات الحضور (ص 56):</strong>
+                                        <span>تعديل حالة الطالب عند اللزوم بين: <span class="font-semibold text-emerald-700">حاضر</span>، <span class="font-semibold text-red-600">غائب</span>، أو <span class="font-semibold text-amber-600">متأخر</span> ثم النقر على حفظ.</span>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-1">
+                                        <strong class="font-bold text-slate-800 block mb-0.5">تصحيح الواجبات وإعادة المهمة (ص 24-26):</strong>
+                                        <span>من قائمة <code class="text-petrolBlue font-semibold">الواجبات المرسلة ← إجابات الطلاب</code>: رصد الدرجات وإضافة الملاحظات، أو الضغط على <em>"إعادة المهمة إلى الطالب"</em> لمنحه فرصة أخرى.</span>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-1">
+                                        <strong class="font-bold text-slate-800 block mb-0.5">الترحيل لسجل المتابعة (ص 22):</strong>
+                                        <span>التأكد من تحديد خيار <span class="font-semibold text-slate-900 underline">"إضافة الواجب في سجل المتابعة اليومي"</span> لترحيل الدرجة آلياً دون إعادة الإدخال.</span>
+                                    </div>
+
+                                    <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white transition space-y-1">
+                                        <strong class="font-bold text-slate-800 block mb-0.5">تصدير إكسل وإشعار ولي الأمر (ص 62، 65):</strong>
+                                        <span>تصدير ملف الإكسل المعتمد من <code class="text-slate-900 font-semibold">سجلات متابعة الفصول</code>، وإرسال إشعار بمستوى الطالب لولي الأمر والموجه الطلابي.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer Meta & Official Reference -->
+            <footer class="mt-12 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-moeGreen"></div>
+                    <span>استناداً إلى: <strong>دليل المستخدم للمعلمين والمعلمات في منصة مدرستي (إصدار 07 يناير 2026)</strong></span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="hover:text-moeGreen transition">وزارة التعليم — المملكة العربية السعودية</span>
+                    <span>•</span>
+                    <a href="https://www.moe.gov.sa" target="_blank" class="text-moeGreen font-semibold hover:underline">WWW.MOE.GOV.SA</a>
+                </div>
+            </footer>
+        </section>
+
+
+        <!-- ========================================== -->
+        <!-- TAB 2: INTERACTIVE MOTION STORYBOARD (Simulator) -->
+        <!-- ========================================== -->
+        <section id="videoPlayerSection" class="hidden transition-all duration-300">
+            
+            <!-- Video Player Simulator Container -->
+            <div class="max-w-4xl mx-auto">
+                <div class="clay-card rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-floating bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+                    
+                    <!-- Decorative Lighting FX -->
+                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-moeEmerald/20 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teamsPurple/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <!-- Simulator Top Bar -->
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+                            <div>
+                                <h3 class="text-base sm:text-lg font-heading font-bold text-white flex items-center gap-2">
+                                    <span>محاكي موشن جرافيك الحصة المتزامنة</span>
+                                    <span class="text-xs px-2 py-0.5 rounded-full bg-moeGreen/30 text-moeEmerald border border-moeEmerald/40">60 - 85 ثانية</span>
+                                </h3>
+                                <p class="text-xs text-slate-400">نمط العرض: ريلز طولي 9:16 أو شاشة عرض 16:9 وفق سيناريو كانفا المعتمد</p>
+                            </div>
+                        </div>
+
+                        <!-- Progress Timer Display -->
+                        <div class="text-left font-mono text-xs sm:text-sm text-emerald-400 font-bold bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
+                            <span id="sceneTimer">00:00</span> / <span id="totalTimer">01:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Screen Viewport Simulator (The Virtual Screen) -->
+                    <div class="relative w-full aspect-video sm:aspect-[16/9] bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/40 rounded-2xl border border-slate-800 p-6 flex flex-col justify-between overflow-hidden shadow-inner">
+                        
+                        <!-- Scene Top Meta -->
+                        <div class="flex items-center justify-between z-10">
+                            <div id="sceneBadge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-petrolBlue/80 text-cyan-200 border border-cyan-400/30">
+                                المشهد 1: الخطاف البصري
+                            </div>
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs text-slate-400">الانتقال:</span>
+                                <span id="transitionType" class="text-xs px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">Zoom & Match Cut</span>
+                            </div>
+                        </div>
+
+                        <!-- Animated Center Visual & Floating Keywords -->
+                        <div class="my-auto text-center py-4 z-10 space-y-3">
+                            <!-- Animated 3D Floating Icon Placeholder -->
+                            <div id="sceneIconContainer" class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-moeGreen to-moeEmerald flex items-center justify-center text-white shadow-lg shadow-moeGreen/40 animate-subtle transition-all duration-500">
+                                <i id="sceneLucideIcon" data-lucide="sparkles" class="w-10 h-10"></i>
+                            </div>
+
+                            <!-- Pop-up Dynamic Keywords -->
+                            <div id="popupKeywords" class="flex flex-wrap items-center justify-center gap-2 pt-2 transition-all">
+                                <span class="px-3.5 py-1.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-heading font-extrabold text-sm sm:text-base tracking-wide shadow-lg">
+                                    الحصة الافتراضية المتزامنة
+                                </span>
+                                <span class="px-3.5 py-1.5 rounded-xl bg-moeEmerald/30 border border-moeEmerald/50 text-emerald-300 font-heading font-bold text-xs sm:text-sm">
+                                    4 محطات إجرائية
+                                </span>
+                            </div>
+
+                            <!-- Visual Description Cue -->
+                            <p id="sceneVisualDesc" class="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto px-4 leading-relaxed font-sans">
+                                دوران شخصية المعلم السعودي مع شاشة هولوجرام متوهجة تمتد من شعار مدرستي إلى مايكروسوفت تيمز.
+                            </p>
+                        </div>
+
+                        <!-- Bottom Voiceover & Audio Cues -->
+                        <div class="z-10 bg-slate-900/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+                            <div class="flex items-center gap-3 w-full">
+                                <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-moeEmerald flex items-center justify-center shrink-0">
+                                    <i data-lucide="mic" class="w-4 h-4"></i>
+                                </div>
+                                <div class="text-right">
+                                    <span class="block text-[11px] text-slate-400 font-bold">النص الصوتي (Voiceover):</span>
+                                    <p id="voiceoverText" class="text-xs sm:text-sm text-white font-medium leading-snug">
+                                        "حصتك الافتراضية المتزامنة... في أربع مراحل فقط وبكل موثوقية وفق الدليل المعتمد."
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="shrink-0 flex items-center gap-2 text-[11px] text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-lg border border-slate-700">
+                                <i data-lucide="music" class="w-3.5 h-3.5 text-cyan-400"></i>
+                                <span id="sfxDesc">Whoosh + Chime</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Timeline Progress Scrub Bar -->
+                    <div class="mt-6 space-y-2">
+                        <div class="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden relative cursor-pointer" id="timelineBar">
+                            <div id="timelineProgress" class="h-full bg-gradient-to-r from-petrolBlue via-teamsPurple to-moeEmerald w-1/5 transition-all duration-300"></div>
+                        </div>
+
+                        <!-- Scene Step Selector Buttons -->
+                        <div class="grid grid-cols-5 gap-2 pt-2">
+                            <button onclick="goToScene(0)" class="scene-tab-btn py-2 px-1 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-cyan-300 text-xs font-bold border border-cyan-500/40 transition flex flex-col items-center">
+                                <span>1. الخطاف</span>
+                                <span class="text-[10px] text-slate-400">0 - 8ث</span>
+                            </button>
+                            <button onclick="goToScene(1)" class="scene-tab-btn py-2 px-1 rounded-xl bg-slate-800/40 hover:bg-slate-700 text-slate-400 text-xs font-medium border border-transparent transition flex flex-col items-center">
+                                <span>2. الإعداد</span>
+                                <span class="text-[10px] text-slate-500">8 - 20ث</span>
+                            </button>
+                            <button onclick="goToScene(2)" class="scene-tab-btn py-2 px-1 rounded-xl bg-slate-800/40 hover:bg-slate-700 text-slate-400 text-xs font-medium border border-transparent transition flex flex-col items-center">
+                                <span>3. الانطلاق</span>
+                                <span class="text-[10px] text-slate-500">20 - 34ث</span>
+                            </button>
+                            <button onclick="goToScene(3)" class="scene-tab-btn py-2 px-1 rounded-xl bg-slate-800/40 hover:bg-slate-700 text-slate-400 text-xs font-medium border border-transparent transition flex flex-col items-center">
+                                <span>4. التفاعل</span>
+                                <span class="text-[10px] text-slate-500">34 - 48ث</span>
+                            </button>
+                            <button onclick="goToScene(4)" class="scene-tab-btn py-2 px-1 rounded-xl bg-slate-800/40 hover:bg-slate-700 text-slate-400 text-xs font-medium border border-transparent transition flex flex-col items-center">
+                                <span>5. الاعتماد</span>
+                                <span class="text-[10px] text-slate-500">48 - 60ث</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Controls -->
+                    <div class="flex items-center justify-between pt-6 border-t border-slate-800 mt-6 flex-wrap gap-4">
+                        <div class="flex items-center gap-3">
+                            <button id="playPauseBtn" onclick="togglePlay()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-moeGreen to-moeEmerald hover:opacity-95 text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-moeGreen/30 transition">
+                                <i id="playIcon" data-lucide="play" class="w-4 h-4 fill-white"></i>
+                                <span id="playBtnText">تشغيل المشاهد آلياً</span>
+                            </button>
+                            <button onclick="restartScenes()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="إعادة البدء">
+                                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button onclick="prevScene()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-semibold flex items-center gap-1.5 transition">
+                                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                                <span>المشهد السابق</span>
+                            </button>
+                            <button onclick="nextScene()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-white font-semibold flex items-center gap-1.5 transition">
+                                <span>المشهد التالي</span>
+                                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive Script (Audio Synthesizer & State Controller) -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // -------------------------------------------------------------
+        // Web Audio API Sound Synthesizer (No external MP3 files needed)
+        // -------------------------------------------------------------
+        let audioCtx = null;
+        let isMuted = false;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playTone(type) {
+            if (isMuted) return;
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                
+                if (type === 'click') {
+                    // Crisp UI Tap Click
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(800, now);
+                    osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+                    gain.gain.setValueAtTime(0.3, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'whoosh') {
+                    // Soft Aerodynamic Whoosh
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(200, now);
+                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.12);
+                    osc.frequency.exponentialRampToValueAtTime(150, now + 0.25);
+                    gain.gain.setValueAtTime(0.01, now);
+                    gain.gain.linearRampToValueAtTime(0.2, now + 0.1);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'chime' || type === 'step4') {
+                    // Success Completion Chime (Ding!)
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + (i * 0.06));
+                        gain.gain.setValueAtTime(0.2, now + (i * 0.06));
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + (i * 0.06) + 0.4);
+                        osc.connect(gain);
+                        gain.connect(ctx.destination);
+                        osc.start(now + (i * 0.06));
+                        osc.stop(now + (i * 0.06) + 0.45);
+                    });
+                } else if (type === 'step1') {
+                    // High tech notification tone
+                    playBeep(440, 0.1, 'sine');
+                    setTimeout(() => playBeep(880, 0.15, 'sine'), 100);
+                } else if (type === 'step2') {
+                    // Teams Call Join Harmonic
+                    playBeep(392, 0.12, 'sine');
+                    setTimeout(() => playBeep(587.33, 0.2, 'sine'), 120);
+                } else if (type === 'step3') {
+                    // Interactive bubble pop
+                    playBeep(659.25, 0.08, 'triangle');
+                    setTimeout(() => playBeep(783.99, 0.1, 'sine'), 80);
+                }
+            } catch (e) {
+                console.debug('Audio not supported or blocked:', e);
+            }
+        }
+
+        function playBeep(freq, duration, waveType = 'sine') {
+            const ctx = getAudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const now = ctx.currentTime;
+            osc.type = waveType;
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.25, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now);
+            osc.stop(now + duration);
+        }
+
+        // Sound Toggle Button
+        document.getElementById('soundToggleBtn').addEventListener('click', () => {
+            isMuted = !isMuted;
+            const soundIcon = document.getElementById('soundIcon');
+            if (isMuted) {
+                soundIcon.setAttribute('data-lucide', 'volume-x');
+                soundIcon.classList.remove('text-emerald-600');
+                soundIcon.classList.add('text-slate-400');
+            } else {
+                soundIcon.setAttribute('data-lucide', 'volume-2');
+                soundIcon.classList.add('text-emerald-600');
+                soundIcon.classList.remove('text-slate-400');
+                playTone('click');
+            }
+            lucide.createIcons();
+        });
+
+
+        // -------------------------------------------------------------
+        // View Tab Switcher (Infographic vs Storyboard Simulator)
+        // -------------------------------------------------------------
+        const viewInfographicBtn = document.getElementById('viewInfographicBtn');
+        const viewVideoPlayerBtn = document.getElementById('viewVideoPlayerBtn');
+        const infographicSection = document.getElementById('infographicSection');
+        const videoPlayerSection = document.getElementById('videoPlayerSection');
+
+        viewInfographicBtn.addEventListener('click', () => {
+            playTone('click');
+            infographicSection.classList.remove('hidden');
+            videoPlayerSection.classList.add('hidden');
+            viewInfographicBtn.classList.add('bg-white', 'text-moeGreen', 'shadow-sm', 'font-bold');
+            viewInfographicBtn.classList.remove('text-slate-600');
+            viewVideoPlayerBtn.classList.remove('bg-white', 'text-moeGreen', 'shadow-sm', 'font-bold');
+            viewVideoPlayerBtn.classList.add('text-slate-600');
+            pausePlayback();
+        });
+
+        viewVideoPlayerBtn.addEventListener('click', () => {
+            playTone('click');
+            videoPlayerSection.classList.remove('hidden');
+            infographicSection.classList.add('hidden');
+            viewVideoPlayerBtn.classList.add('bg-white', 'text-moeGreen', 'shadow-sm', 'font-bold');
+            viewVideoPlayerBtn.classList.remove('text-slate-600');
+            viewInfographicBtn.classList.remove('bg-white', 'text-moeGreen', 'shadow-sm', 'font-bold');
+            viewInfographicBtn.classList.add('text-slate-600');
+        });
+
+
+        // -------------------------------------------------------------
+        // Video Storyboard Scenes Data & Engine (60s Reel Breakdown)
+        // -------------------------------------------------------------
+        const scenes = [
+            {
+                badge: "المشهد 1: الخطاف البصري (00:00 - 00:08)",
+                durationSec: 8,
+                transition: "Slide In & Zoom",
+                icon: "sparkles",
+                iconBg: "from-moeGreen to-moeEmerald",
+                keywords: [
+                    { text: "حصتك المتزامنة", color: "bg-emerald-600/40 text-emerald-300 border-emerald-400" },
+                    { text: "4 خطوات إجرائية", color: "bg-white/10 text-white border-white/20" }
+                ],
+                visual: "ظهور شخصية المعلم السعودي بجوار شاشة لابتوب هولوجرامية ثلاثية الأبعاد تطفو في الفضاء، متصلة بشعار مدرستي وأيقونة تيمز.",
+                voiceover: "خطوتك نحو فصل افتراضي احترافي ومكتمل الأركان... كيف تدير حصتك المتزامنة في مدرستي بكل ثقة ووفق الدليل الرسمي 2026؟ إليك 4 محطات.",
+                sfx: "Whoosh ناعم + نغمة انطلاق"
+            },
+            {
+                badge: "المشهد 2: ما قبل الحصة — الإعداد (00:08 - 00:20)",
+                durationSec: 12,
+                transition: "Match Cut & Drop",
+                icon: "calendar-check",
+                iconBg: "from-petrolBlue to-cyan-600",
+                keywords: [
+                    { text: "المقررات ← الجدول الدراسي", color: "bg-cyan-600/40 text-cyan-300 border-cyan-400" },
+                    { text: "نمط: افتراضي متزامن", color: "bg-emerald-600/40 text-emerald-300 border-emerald-400" },
+                    { text: "عنصر إلزامي ≥ 1", color: "bg-amber-600/40 text-amber-300 border-amber-400" },
+                    { text: "معاينة شاشة الطالب", color: "bg-white/10 text-white border-white/20" }
+                ],
+                visual: "يد ثلاثية الأبعاد تنقر على الجدول الدراسي، هبوط تقويم مجسم، إضاءة خيار افتراضي متزامن، ونزول عنصر الواجب الإلزامي.",
+                voiceover: "أولاً: من المقررات والمصادر، ادخل جدولك وحدد الحصة. اختر نمط التعلم: افتراضي متزامن. لا تنسَ إضافة عنصر إلزامي ومعاينة شاشة الطالب.",
+                sfx: "نقرات واجهة سريعة UI Clicks"
+            },
+            {
+                badge: "المشهد 3: الانطلاق — الربط مع Teams (00:20 - 00:34)",
+                durationSec: 14,
+                transition: "Slide Left",
+                icon: "video",
+                iconBg: "from-teamsPurple to-indigo-600",
+                keywords: [
+                    { text: "إشعار بريدي فوري للطلاب", color: "bg-purple-600/40 text-purple-300 border-purple-400" },
+                    { text: "أدوات المساعدة ← تيمز", color: "bg-indigo-600/40 text-indigo-300 border-indigo-400" },
+                    { text: "بدء البث في الموعد", color: "bg-emerald-600/40 text-emerald-300 border-emerald-400" }
+                ],
+                visual: "انبثاق ظرف بريد يطير للطلاب حاملاً رابط الحصة، ثم تكبير على أيقونة مايكروسوفت أوفيس بأعلى الشاشة وانفتاح نافذة Teams.",
+                voiceover: "ثانياً: بمجرد الحفظ، يتلقى الطلاب آلياً بريداً برابط الدرس. ومن شريط أدوات المساعدة، اضغط أيقونة أوفيس لتدخل تيمز وتبدأ الحصة في موعدها.",
+                sfx: "نغمة وصول بريد + فتح اتصال"
+            },
+            {
+                badge: "المشهد 4: أثناء الحصة — التفاعل الصفي (00:34 - 00:48)",
+                durationSec: 14,
+                transition: "Split Card & Float",
+                icon: "messages-square",
+                iconBg: "from-moeEmerald to-teal-600",
+                keywords: [
+                    { text: "لوحات النقاش (عشوائي / منظم)", color: "bg-teal-600/40 text-teal-300 border-teal-400" },
+                    { text: "ألعاب بنك الأسئلة التفاعلية", color: "bg-emerald-600/40 text-emerald-300 border-emerald-400" },
+                    { text: "تثبيت مشاركات الطلاب", color: "bg-cyan-600/40 text-cyan-300 border-cyan-400" }
+                ],
+                visual: "أيقونة كويز تفاعلي متوهجة تنقسم لمجموعات عمل، ظهور بطاقات ألعاب (فكر واختر)، ودبوس يثبت إجابة طالب مميزة.",
+                voiceover: "ثالثاً: فعّل التفاعل الصفي داخل المنصة؛ أطلق لوحات النقاش مقسمة عشوائياً أو يدوياً، شاركهم ألعاب بنك الأسئلة، وثبّت مشاركاتهم المتميزة.",
+                sfx: "فقاعات حوارية Pop + نغمة تأكيد"
+            },
+            {
+                badge: "المشهد 5: بعد الحصة — الرصد والاعتماد (00:48 - 01:00)",
+                durationSec: 12,
+                transition: "Scale & Settle",
+                icon: "clipboard-check",
+                iconBg: "from-alertOrange to-amber-600",
+                keywords: [
+                    { text: "⚠️ تيمز يرصد.. وأنت تعتمد (زر حفظ)", color: "bg-amber-600/50 text-amber-200 border-amber-300 font-bold" },
+                    { text: "الواجبات ← سجل المتابعة اليومي", color: "bg-emerald-600/40 text-emerald-300 border-emerald-400" },
+                    { text: "تصدير ملف الإكسل", color: "bg-white/10 text-white border-white/20" }
+                ],
+                visual: "لوح الحضور ثلاثي الأبعاد تمتلئ فيه علامات الصح، وميض برتقالي على زر حفظ، وتحليق بطاقة الدرجات نحو سجل المتابعة اليومي.",
+                voiceover: "رابعاً: خطوة الرصد الحاسمة! قائمة تيمز مسجلة، لكن يجب فتح شاشة رصد الغياب والضغط على حفظ لاعتمادها. ثم رحّل الواجبات واعتمد تقريرك.",
+                sfx: "نقرة حفظ قوية Chime + نغمة الختام"
+            }
+        ];
+
+        let currentSceneIndex = 0;
+        let isPlaying = false;
+        let playbackTimer = null;
+        let sceneSecondCounter = 0;
+
+        function updateSceneView(index) {
+            const scene = scenes[index];
+            currentSceneIndex = index;
+
+            // Update Meta & Badge
+            document.getElementById('sceneBadge').textContent = scene.badge;
+            document.getElementById('transitionType').textContent = scene.transition;
+            document.getElementById('sceneVisualDesc').textContent = scene.visual;
+            document.getElementById('voiceoverText').textContent = `"${scene.voiceover}"`;
+            document.getElementById('sfxDesc').textContent = scene.sfx;
+
+            // Update Visual Icon & Theme
+            const iconContainer = document.getElementById('sceneIconContainer');
+            iconContainer.className = `w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr ${scene.iconBg} flex items-center justify-center text-white shadow-lg animate-subtle transition-all duration-500`;
+            const sceneLucideIcon = document.getElementById('sceneLucideIcon');
+            sceneLucideIcon.setAttribute('data-lucide', scene.icon);
+
+            // Update Keywords
+            const popupContainer = document.getElementById('popupKeywords');
+            popupContainer.innerHTML = '';
+            scene.keywords.forEach(kw => {
+                const badge = document.createElement('span');
+                badge.className = `px-3.5 py-1.5 rounded-xl border font-heading text-xs sm:text-sm shadow-md transition-transform duration-300 transform scale-100 ${kw.color}`;
+                badge.textContent = kw.text;
+                popupContainer.appendChild(badge);
+            });
+
+            // Update Tab Highlight
+            document.querySelectorAll('.scene-tab-btn').forEach((btn, idx) => {
+                if (idx === index) {
+                    btn.classList.add('bg-slate-800/80', 'text-cyan-300', 'border-cyan-500/40', 'font-bold');
+                    btn.classList.remove('bg-slate-800/40', 'text-slate-400', 'border-transparent', 'font-medium');
+                } else {
+                    btn.classList.remove('bg-slate-800/80', 'text-cyan-300', 'border-cyan-500/40', 'font-bold');
+                    btn.classList.add('bg-slate-800/40', 'text-slate-400', 'border-transparent', 'font-medium');
+                }
+            });
+
+            // Update Timeline progress
+            const progressPct = ((index + 1) / scenes.length) * 100;
+            document.getElementById('timelineProgress').style.width = `${progressPct}%`;
+
+            // Calculate Elapsed Seconds for display
+            let startSec = 0;
+            for (let i = 0; i < index; i++) startSec += scenes[i].durationSec;
+            const mins = String(Math.floor(startSec / 60)).padStart(2, '0');
+            const secs = String(startSec % 60).padStart(2, '0');
+            document.getElementById('sceneTimer').textContent = `${mins}:${secs}`;
+
+            lucide.createIcons();
+            playTone('whoosh');
+        }
+
+        function nextScene() {
+            if (currentSceneIndex < scenes.length - 1) {
+                updateSceneView(currentSceneIndex + 1);
+            } else {
+                updateSceneView(0);
+            }
+        }
+
+        function prevScene() {
+            if (currentSceneIndex > 0) {
+                updateSceneView(currentSceneIndex - 1);
+            } else {
+                updateSceneView(scenes.length - 1);
+            }
+        }
+
+        function goToScene(index) {
+            pausePlayback();
+            updateSceneView(index);
+        }
+
+        function togglePlay() {
+            if (isPlaying) {
+                pausePlayback();
+            } else {
+                startPlayback();
+            }
+        }
+
+        function startPlayback() {
+            isPlaying = true;
+            document.getElementById('playBtnText').textContent = 'إيقاف مؤقت';
+            const playIcon = document.getElementById('playIcon');
+            playIcon.setAttribute('data-lucide', 'pause');
+            lucide.createIcons();
+
+            playbackTimer = setInterval(() => {
+                if (currentSceneIndex < scenes.length - 1) {
+                    updateSceneView(currentSceneIndex + 1);
+                } else {
+                    pausePlayback();
+                    playTone('chime');
+                }
+            }, 6000); // 6s per preview card in interactive simulator
+        }
+
+        function pausePlayback() {
+            isPlaying = false;
+            clearInterval(playbackTimer);
+            document.getElementById('playBtnText').textContent = 'تشغيل المشاهد آلياً';
+            const playIcon = document.getElementById('playIcon');
+            playIcon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+        }
+
+        function restartScenes() {
+            pausePlayback();
+            updateSceneView(0);
+        }
+
+        // Initialize First Scene View
+        updateSceneView(0);
+    </script>
+</body>
+</html>
